@@ -1,0 +1,17 @@
+cmake_minimum_required(VERSION 3.5)
+project(tiny-cpp-socket)
+message(${CMAKE_SYSTEM_NAME})
+if("${CMAKE_SYSTEM_NAME}" MATCHES  "Windows")
+message(${CMAKE_SYSTEM_NAME})
+add_definitions(-DWINDOWS_OS)
+add_definitions(-DWINDOWS)
+else()
+add_definitions(-DLINUX_OS)
+endif()
+SET(SOURCE_FILE ./demo/main.cpp)
+SET(SOCKET_FILE ./include/TCPClient.cpp
+                ./include/TCPServer.cpp
+                ./include/Socket.cpp)
+add_executable(demo ${SOURCE_FILE})
+add_executable(tcp_server_demo ./demo/tcpserver_demo.cpp ${SOCKET_FILE})
+add_executable(tcp_client_demo ./demo/tcpclient_demo.cpp ${SOCKET_FILE})
